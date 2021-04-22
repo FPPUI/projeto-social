@@ -4,6 +4,9 @@ const router = require('./routes')
 
 const app = express()
 
-app.use(router)
+require('dotenv').config();
 
-app.listen(4444, console.log('Working'))
+app.use('/', router)
+app.use(express.json())
+
+app.listen(process.env.NODE_PORT, console.log(`Working in port ${process.env.NODE_PORT}`))
