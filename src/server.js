@@ -4,9 +4,11 @@ const router = require('./routes')
 
 const app = express()
 
-require('dotenv').config();
+require('dotenv/config');
 
-app.use('/', router)
 app.use(express.json())
+app.use('/', router)
 
-app.listen(process.env.NODE_PORT, console.log(`Working in port ${process.env.NODE_PORT}`))
+
+const port = process.env.NODE_PORT || 3000
+app.listen(port, console.log(`Working in port ${port}`))

@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Cadastro_Estudantes extends Model {
+  class Advogado_Responsavel extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,19 +13,19 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Cadastro_Estudantes.init({
+  Advogado_Responsavel.init({
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    matricula: {
-      type: DataTypes.STRING(25),
+    registro_oab: {
+      type: DataTypes.STRING(60),
       unique: true
     },
     nome: {
-      type: DataTypes.STRING(60)
+      type: DataTypes.STRING(60),
     },
     endereco: {
       type: DataTypes.STRING(100)
@@ -33,27 +33,13 @@ module.exports = (sequelize, DataTypes) => {
     telefone: {
       type: DataTypes.STRING(13)
     },
-    nacionalidade: {
-      type: DataTypes.STRING(30)
-    },
-    estado: {
-      type: DataTypes.STRING(30)
-    },
-    cidade: {
-      type: DataTypes.STRING(150)
-    },
-    nascimento: {
-      type: DataTypes.DATE
-    },
-    sexo: {
-      type: DataTypes.STRING(9)
-    },
-    obs: {
-      type: DataTypes.STRING(255),
-    },
+    email: {
+      type: DataTypes.STRING(100),
+      unique: true
+    }
   }, {
     sequelize,
-    modelName: 'Cadastro_Estudantes',
+    modelName: 'Advogado_Responsavel',
   });
-  return Cadastro_Estudantes;
+  return Advogado_Responsavel;
 };

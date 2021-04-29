@@ -8,35 +8,32 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      Matricula_Filho: {
+      matricula_filho: {
         type: Sequelize.STRING(25),
         unique: true
       },
-      Nome_Filho: {
+      nome: {
         type: Sequelize.STRING(60),
       },
-      Nome_Responsavel: {
-        type: Sequelize.STRING(60),
-      },
-      Endereco: {
+      endereco: {
         type: Sequelize.STRING(100)
       },
-      Telefone: {
+      telefone: {
         type: Sequelize.STRING(13)
       },
-      Nacionalidade: {
+      nacionalidade: {
         type: Sequelize.STRING(30)
       },
-      Estado: {
+      estado: {
         type: Sequelize.STRING(30)
       },
-      Cidade: {
+      cidade: {
         type: Sequelize.STRING(150)
       },
-      Nascimento: {
+      nascimento: {
         type: Sequelize.DATE
       },
-      Trabalho_Local: {
+      trabalho_local: {
         type: Sequelize.STRING(255)
       },
       createdAt: {

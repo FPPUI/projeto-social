@@ -20,35 +20,32 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    Matricula_Filho: {
+    matricula_filho: {
       type: DataTypes.STRING(25),
       unique: true
     },
-    Nome_Filho: {
+    nome: {
       type: DataTypes.STRING(60),
     },
-    Nome_Responsavel: {
-      type: DataTypes.STRING(60),
-    },
-    Endereco: {
+    endereco: {
       type: DataTypes.STRING(100)
     },
-    Telefone: {
+    telefone: {
       type: DataTypes.STRING(13)
     },
-    Nacionalidade: {
+    nacionalidade: {
       type: DataTypes.STRING(30)
     },
-    Estado: {
+    estado: {
       type: DataTypes.STRING(30)
     },
-    Cidade: {
+    cidade: {
       type: DataTypes.STRING(150)
     },
-    Nascimento: {
+    nascimento: {
       type: DataTypes.DATE
     },
-    Trabalho_Local: {
+    trabalho_local: {
       type: DataTypes.STRING(255)
     }
   }, {
