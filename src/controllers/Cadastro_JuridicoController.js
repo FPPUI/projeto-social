@@ -2,24 +2,24 @@ const dbtools = require('../database/connection')
 const connection = dbtools.sequelize()
 const DataTypes = dbtools.dataTypes()
 
-const modelestudantes = require('../database/models/cadastro_estudantes')
-const estudantes = modelestudantes(connection, DataTypes)
+const modeljuridico = require('../database/models/cadastro_juridico')
+const juridico = modeljuridico(connection, DataTypes)
 
-class Cadastro_EstudantesController {
+class Cadastro_JuridicoController {
     async cadastrar(req, res){
         try {
-            let matricula = req.body.matricula
+            let oab_advogado = req.body.oab_advogado
             let nome = req.body.nome
             let endereco = req.body.endereco
+            let cpf = req.body.cpf
+            let rg = req.body.cidade
             let telefone = req.body.telefone
-            let nacionalidade = req.body.nacionalidade
-            let estado = req.body.estado
-            let cidade = req.body.cidade
-            let nascimento = req.body.nascimento
-            let sexo = req.body.sexo
-            let obs = req.body.obs
+            let numero_processo = req.body.numero_processo
+            let vara_criminal = req.body.vara_criminal
+            let data_acusacao = req.body.data_acusacao
+            let informacoes_adicionais = req.body.informacoes_adicionais
 
-            let cadastro = await estudantes.create({matricula, nome, endereco, telefone, nacionalidade, estado, cidade, nascimento, sexo, obs})
+            let cadastro = await juridico.create({oab_advogado, nome, endereco, cpf, rg, telefone, numero_processo, vara_criminal, data_acusacao, informacoes_adicionais})
             res.status(201).json({cadastro})
 
         } catch (error) {
@@ -29,20 +29,20 @@ class Cadastro_EstudantesController {
 
     async editar(req, res){
         try {
-            let matricula = req.body.matricula
+            let oab_advogado = req.body.oab_advogado
             let nome = req.body.nome
             let endereco = req.body.endereco
+            let cpf = req.body.cpf
+            let rg = req.body.cidade
             let telefone = req.body.telefone
-            let nacionalidade = req.body.nacionalidade
-            let estado = req.body.estado
-            let cidade = req.body.cidade
-            let nascimento = req.body.nascimento
-            let sexo = req.body.sexo
-            let obs = req.body.obs
+            let numero_processo = req.body.numero_processo
+            let vara_criminal = req.body.vara_criminal
+            let data_acusacao = req.body.data_acusacao
+            let informacoes_adicionais = req.body.informacoes_adicionais
 
-            let cadastro = await estudantes.update({nome, endereco, telefone, nacionalidade, estado, cidade, nascimento, sexo, obs},
-                {where:{
-                    matricula
+            let cadastro = await juridico.update({nome, endereco, cpf, rg, telefone, numero_processo, vara_criminal, data_acusacao, informacoes_adicionais},{
+                where:{
+                    oab_advogado
                 }})
             res.status(200).json({cadastro})
 
@@ -53,11 +53,11 @@ class Cadastro_EstudantesController {
 
     async deletar(req, res){
         try {
-            let matricula = req.body.matricula
+            let oab_advogado = req.body.oab_advogado
 
-            let cadastro = await estudantes.destroy({
+            let cadastro = await juridico.destroy({
                 where:{
-                    matricula
+                    oab_advogado
                 }})
             res.status(200).json({cadastro})
 
@@ -68,7 +68,7 @@ class Cadastro_EstudantesController {
 
     async showall(req, res){
         try{
-            const cadastros = await estudantes.findAll()
+            const cadastros = await juridico.findAll()
 
             res.status(200).json({cadastros})
         } catch (error) {
@@ -78,4 +78,4 @@ class Cadastro_EstudantesController {
 
 }
 
-exports.default = Cadastro_EstudantesController;
+exports.default = Cadastro_JuridicoController;

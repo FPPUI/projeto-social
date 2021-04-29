@@ -2,8 +2,8 @@ const dbtools = require('../database/connection')
 const connection = dbtools.sequelize()
 const DataTypes = dbtools.dataTypes()
 
-const modelresponsavel = require('../database/models/advogado_responsavel')
-const responsavel = modelresponsavel(connection, DataTypes)
+const modeladvogado = require('../database/models/advogado_responsavel')
+const advogado = modeladvogado(connection, DataTypes)
 
 class Advogado_ResponsavelController {
     async cadastrar(req, res){
@@ -12,14 +12,9 @@ class Advogado_ResponsavelController {
             let nome = req.body.nome
             let endereco = req.body.endereco
             let telefone = req.body.telefone
-            let nacionalidade = req.body.nacionalidade
-            let estado = req.body.estado
-            let cidade = req.body.cidade
-            let nascimento = req.body.nascimento
-            let sexo = req.body.sexo
-            let obs = req.body.obs
+            let email = req.body.email
 
-            let cadastro = await estudantes.create({matricula, nome, endereco, telefone, nacionalidade, estado, cidade, nascimento, sexo, obs})
+            let cadastro = await advogado.create({registro_oab, nome, endereco, telefone, email})
             res.status(201).json({cadastro})
 
         } catch (error) {
@@ -29,20 +24,15 @@ class Advogado_ResponsavelController {
 
     async editar(req, res){
         try {
-            let matricula = req.body.matricula
+            let registro_oab = req.body.registro_oab
             let nome = req.body.nome
             let endereco = req.body.endereco
             let telefone = req.body.telefone
-            let nacionalidade = req.body.nacionalidade
-            let estado = req.body.estado
-            let cidade = req.body.cidade
-            let nascimento = req.body.nascimento
-            let sexo = req.body.sexo
-            let obs = req.body.obs
+            let email = req.body.email
 
-            let cadastro = await estudantes.update({nome, endereco, telefone, nacionalidade, estado, cidade, nascimento, sexo, obs},
-                {where:{
-                    matricula
+            let cadastro = await advogado.update({nome, endereco, telefone, email}, {
+                where:{
+                    registro_oab
                 }})
             res.status(200).json({cadastro})
 
@@ -53,11 +43,11 @@ class Advogado_ResponsavelController {
 
     async deletar(req, res){
         try {
-            let matricula = req.body.matricula
+            let registro_oab = req.body.registro_oab
 
-            let cadastro = await estudantes.destroy({
+            let cadastro = await advogado.destroy({
                 where:{
-                    matricula
+                    registro_oab
                 }})
             res.status(200).json({cadastro})
 
@@ -68,7 +58,7 @@ class Advogado_ResponsavelController {
 
     async showall(req, res){
         try{
-            const cadastros = await estudantes.findAll()
+            const cadastros = await advogado.findAll()
 
             res.status(200).json({cadastros})
         } catch (error) {

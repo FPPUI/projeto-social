@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.STRING(9)
       },
       obs: {
-        type: Sequelize.STRING(255),
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,

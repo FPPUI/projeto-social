@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(9)
     },
     obs: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
     },
   }, {
     sequelize,
