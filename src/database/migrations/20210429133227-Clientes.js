@@ -1,16 +1,22 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Cadastro_Responsavels', {
+    await queryInterface.createTable('Clientes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      matricula_filho: {
-        type: Sequelize.STRING(25),
-        unique: true
+      advogado_id: {
+        type: Sequelize.INTEGER,
+        unique: true,
+        references: {
+          model: {
+            tableName: 'Advogados'
+          },
+          key: 'id'
+        },
       },
       nome: {
         type: Sequelize.STRING(60),
@@ -18,23 +24,26 @@ module.exports = {
       endereco: {
         type: Sequelize.STRING(100)
       },
+      cpf: {
+        type: Sequelize.STRING(11)
+      },
+      rg: {
+        type: Sequelize.STRING(9)
+      },
       telefone: {
         type: Sequelize.STRING(13)
       },
-      nacionalidade: {
-        type: Sequelize.STRING(30)
+      numero_processo: {
+        type: Sequelize.STRING(20)
       },
-      estado: {
-        type: Sequelize.STRING(30)
+      vara_criminal: {
+        type: Sequelize.STRING(40)
       },
-      cidade: {
-        type: Sequelize.STRING(150)
-      },
-      nascimento: {
+      data_acusacao: {
         type: Sequelize.DATE
       },
-      trabalho_local: {
-        type: Sequelize.STRING(255)
+      informacoes_adicionais: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -47,6 +56,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Cadastro_Responsavels');
+    await queryInterface.dropTable('Clientes');
   }
 };

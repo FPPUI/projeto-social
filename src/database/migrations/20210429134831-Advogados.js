@@ -1,22 +1,16 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Cadastro_Juridicos', {
+    await queryInterface.createTable('Advogados', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      oab_advogado: {
+      registro_oab: {
         type: Sequelize.STRING(60),
-        unique: true,
-        references: {
-          model: {
-            tableName: 'advogado_responsavel'
-          },
-          key: 'registro_oab'
-        },
+        unique: true
       },
       nome: {
         type: Sequelize.STRING(60),
@@ -24,26 +18,12 @@ module.exports = {
       endereco: {
         type: Sequelize.STRING(100)
       },
-      cpf: {
-        type: Sequelize.STRING(11)
-      },
-      rg: {
-        type: Sequelize.STRING(9)
-      },
       telefone: {
         type: Sequelize.STRING(13)
       },
-      numero_processo: {
-        type: Sequelize.STRING(20)
-      },
-      vara_criminal: {
-        type: Sequelize.STRING(40)
-      },
-      data_acusacao: {
-        type: Sequelize.DATE
-      },
-      informacoes_adicionais: {
-        type: Sequelize.TEXT
+      email: {
+        type: Sequelize.STRING(100),
+        unique: true
       },
       createdAt: {
         allowNull: false,
@@ -56,6 +36,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Cadastro_Juridicos');
+    await queryInterface.dropTable('Advogados');
   }
 };

@@ -1,19 +1,14 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+const {Aluno} = require('./Aluno')
+
 module.exports = (sequelize, DataTypes) => {
-  class Cadastro_Responsavel extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class Responsavel extends Model {
     static associate(models) {
-      // define association here
+      this.belongsTo(Aluno, {foreignKey: 'advogado_id'})
     }
   };
-  Cadastro_Responsavel.init({
+  Responsavel.init({
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -50,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Cadastro_Responsavel',
+    modelName: 'Responsavel',
   });
-  return Cadastro_Responsavel;
+  return Responsavel;
 };

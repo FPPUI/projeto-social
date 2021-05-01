@@ -1,15 +1,15 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Advogado_Responsavel', {
+    await queryInterface.createTable('Alunos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      registro_oab: {
-        type: Sequelize.STRING(60),
+      matricula: {
+        type: Sequelize.STRING(25),
         unique: true
       },
       nome: {
@@ -21,9 +21,23 @@ module.exports = {
       telefone: {
         type: Sequelize.STRING(13)
       },
-      email: {
-        type: Sequelize.STRING(100),
-        unique: true
+      nacionalidade: {
+        type: Sequelize.STRING(30)
+      },
+      estado: {
+        type: Sequelize.STRING(30)
+      },
+      cidade: {
+        type: Sequelize.STRING(150)
+      },
+      nascimento: {
+        type: Sequelize.DATE
+      },
+      sexo: {
+        type: Sequelize.STRING(9)
+      },
+      obs: {
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +50,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Advogado_Responsavel');
+    await queryInterface.dropTable('Alunos');
   }
 };

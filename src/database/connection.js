@@ -1,16 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
+const dbconfig = require('./config/config.js')
 
-const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: './src/database/database.sqlite',
-    
-});
+const connection = new Sequelize(dbconfig);
 
-module.exports = {
-    sequelize: function(){
-        return sequelize
-    },
-    dataTypes: function(){
-        return DataTypes
-    }
-}
+module.exports = { connection, DataTypes }

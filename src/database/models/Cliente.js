@@ -1,34 +1,19 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+const Advogado = require('./Advogado')
+
 module.exports = (sequelize, DataTypes) => {
-  class Cadastro_Juridico extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class Cliente extends Model {
     static associate(models) {
-      // define association here
+      this.belongsTo(Advogado, {foreignKey: 'advogado_id'})
     }
   };
-  Cadastro_Juridico.init({
+  Cliente.init({
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
-    },
-    oab_advogado: {
-      type: DataTypes.STRING(60),
-      unique: true,
-      references: {
-        model: {
-          tableName: 'advogado_responsavel'
-        },
-        key: 'registro_oab'
-      },
     },
     nome: {
       type: DataTypes.STRING(60),
@@ -59,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'Cadastro_Juridico',
+    modelName: 'Cliente',
   });
-  return Cadastro_Juridico;
+  return Cliente;
 };
