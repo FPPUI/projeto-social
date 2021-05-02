@@ -16,10 +16,12 @@ module.exports = {
         type: Sequelize.STRING(60),
       },
       endereco: {
-        type: Sequelize.STRING(100)
+        type: Sequelize.STRING(100),
+        unique: true
       },
       telefone: {
-        type: Sequelize.STRING(13)
+        type: Sequelize.STRING(13),
+        unique: true
       },
       email: {
         type: Sequelize.STRING(100),

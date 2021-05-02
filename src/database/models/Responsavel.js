@@ -5,7 +5,7 @@ const {Aluno} = require('./Aluno')
 module.exports = (sequelize, DataTypes) => {
   class Responsavel extends Model {
     static associate(models) {
-      this.belongsTo(Aluno, {foreignKey: 'advogado_id'})
+      this.belongsTo(Aluno, {foreignKey: 'aluno_id'})
     }
   };
   Responsavel.init({
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    matricula_filho: {
+    aluno_id: {
       type: DataTypes.STRING(25),
       unique: true
     },
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Responsavel',
+    modelName: 'Responsaveis',
   });
   return Responsavel;
 };

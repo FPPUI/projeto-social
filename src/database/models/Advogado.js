@@ -22,10 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(60),
     },
     endereco: {
-      type: DataTypes.STRING(100)
+      type: DataTypes.STRING(100),
+      unique: true
     },
     telefone: {
-      type: DataTypes.STRING(13)
+      type: DataTypes.STRING(13),
+      unique: true
     },
     email: {
       type: DataTypes.STRING(100),

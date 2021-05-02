@@ -1,20 +1,19 @@
-const {connection, DataTypes} = require('../database/connection')
-const Advogado = require('../database/models/advogado')(connection, DataTypes)
+const connection = require('../database/connection')
+const {DataTypes, QueryTypes} = require('sequelize')
+const Advogado = require('../database/models/Advogado')(connection, DataTypes)
 
 class AdvogadoController {
     async cadastrar(req, res){
-        const {registro_oab, nome, endereco, telefone, email} = req.body
-        console.log('Pegando dados do body');
         try {
+            
+            const {registro_oab, nome, endereco, telefone, email} = req.body
 
-            const cadastro = await Advogado.create({registro_oab, nome, endereco, telefone, email})
-            console.log('cadastro');
-            res.status(201).json({cadastro})
+            const lawer = await Advogado.create({registro_oab, nome, endereco, telefone, email})
+    
+            res.status(201).json({lawer})
 
         } catch (error) {
-            console.log('erro');
-            
-            res.send(nome)
+            res.json(error.errors[0].message)
         }
     }
 
@@ -24,15 +23,15 @@ class AdvogadoController {
             const {id} = req.params
             const {registro_oab, nome, endereco, telefone, email} = req.body
 
-            const cadastro = await Advogado.update({nome, registro_oab,endereco, telefone, email}, {
+            const lawer = await Advogado.update({nome, registro_oab,endereco, telefone, email}, {
                 where:{
                     id
                 }})
                 
-            res.status(200).json({cadastro})
+            res.status(200).json({lawer})
 
         } catch (error) {
-            logs.error(error)
+            res.json(error.errors[0].message)
         }
     }
 
@@ -41,35 +40,87 @@ class AdvogadoController {
 
             const {id} = req.params
 
-            const cadastro = await Advogado.destroy({
+            const lawer = await Advogado.destroy({
                 where:{
                     id
                 }})
-            res.status(200).json({cadastro})
+
+            res.status(200).json({lawer})
 
         } catch (error) {
-            logs.error(error)
+            res.json(error.errors[0].message)
         }
     }
-
-    async index(req, res){
-        const {nome, registro_oab, endereco, telefone, email} = req.body
-        const cadastro = await Advogado.findOne({
-            where: {
-                nome
-            }
-        })
-
-    }
-
+    
     async showall(req, res){
         try{
-            const cadastros = await Advogado.findAll()
+            const lawer = await Advogado.findAll()
+            
+            res.status(200).json({lawer})
 
-            res.status(200).json({cadastros})
         } catch (error) {
-            logs.error(error)
+            res.json(error.errors[0].message)
         }
+    }
+
+    async showbyid(req, res){
+        try{
+
+            const {id} = req.params
+
+            const lawer = await Advogado.findByPk(id)
+
+            res.status(200).json({lawer})
+
+        } catch (error) {
+            res.json(error.errors[0].message)
+        }
+    }
+    
+    //FINDERS
+
+    async getbyname(req, res){
+        try {
+            
+            var lawer = []
+            const {nome} = req.body
+
+            const id = await connection.query(`SELECT id FROM Advogados WHERE lower(nome) GLOB "*${nome.toLowerCase().trim()}*" `,{
+                type: QueryTypes.SELECT
+            })
+            
+            for (let index = 0; index < id.length; index++) {
+                lawer[index] = await Advogado.findByPk(id[index].id)
+            }
+            res.status(200).json({lawer})
+
+        } catch (error) {
+            console.log("Error in 'getbyname'");
+            res.json(error)
+        }
+
+    }
+    
+    async getbyoab(req, res){
+        try {
+            
+            var lawer = []
+            const {registro_oab} = req.body
+
+            const id = await connection.query(`SELECT id FROM Advogados WHERE lower(registro_oab) GLOB "*${registro_oab.toLowerCase().trim()}*" `,{
+                type: QueryTypes.SELECT
+            })
+            
+            for (let index = 0; index < id.length; index++) {
+                lawer[index] = await Advogado.findByPk(id[index].id)
+            }
+            res.status(200).json({lawer})
+
+        } catch (error) {
+            console.log("Error in 'getbyname'");
+            res.json(error)
+        }
+
     }
 
 }

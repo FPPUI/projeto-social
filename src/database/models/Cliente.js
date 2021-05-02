@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
+    advogado_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     nome: {
       type: DataTypes.STRING(60),
     },
